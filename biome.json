@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
+  "files": {
+    "ignore": ["src/lib/spotify/**"]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space"
