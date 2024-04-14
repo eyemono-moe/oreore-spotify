@@ -19,6 +19,7 @@ type AuthContextAction = {
   login: () => void;
   logout: () => void;
   api: () => Promise<SpotifyClient>;
+  getOrRefreshAccessToken: () => Promise<string | null>;
 };
 
 type AuthContext = [state: AuthContextState, actions: AuthContextAction];
@@ -93,6 +94,46 @@ export const AuthInfoProvider: ParentComponent = (props) => {
       return new SpotifyClient({
         TOKEN: token,
       });
+    },
+    getOrRefreshAccessToken: async () => {
+      const token = tokens.accessToken;
+      if (!token) {
+        return null;
+      }
+
+      if (Date.now() > tokens.expiresAt) {
+        const response = await fetch("https://accounts.spotify.com/api/token", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            grant_type: "refresh_token",
+            refresh_token: tokens.refreshToken,
+            client_id: import.meta.env.VITE_SPOTIFY_CLIENT_ID,
+          }),
+        });
+
+        if (!response.ok) {
+          resetTokens();
+          return null;
+        }
+
+        const data = safeParse(tokenResSchema, await response.json());
+        if (!data.success) {
+          resetTokens();
+          return null;
+        }
+
+        setTokens({
+          accessToken: data.output.access_token,
+          expiresAt: Date.now() + data.output.expires_in * 1000,
+        });
+
+        return data.output.access_token;
+      }
+
+      return token;
     },
   };
 
