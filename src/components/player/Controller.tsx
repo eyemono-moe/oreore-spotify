@@ -5,45 +5,37 @@ const Controller: Component = () => {
   const [state] = usePlaybackSDK();
 
   return (
-    <div>
+    <div class="flex gap-2 bg-transparent justify-center items-center">
       <button
         onClick={async () => {
           await state.player?.previousTrack();
         }}
         type="button"
+        class="i-material-symbols:skip-previous-rounded w-10 h-10 c-white/80 hover:c-white active:c-white/50"
+      />
+      <button
+        onClick={async () => {
+          await state.player?.togglePlay();
+        }}
+        type="button"
+        class="bg-white rounded-full bg-white/80 hover:bg-white active:bg-white/50 p-1"
       >
-        prev
-      </button>
-      <Show
-        when={state.playbackState?.paused}
-        fallback={
-          <button
-            onClick={async () => {
-              await state.player?.pause();
-            }}
-            type="button"
-          >
-            pause
-          </button>
-        }
-      >
-        <button
-          onClick={async () => {
-            await state.player?.resume();
-          }}
-          type="button"
+        <Show
+          when={state.playbackState?.paused}
+          fallback={
+            <div class="i-material-symbols:pause-rounded w-10 h-10 c-black" />
+          }
         >
-          play
-        </button>
-      </Show>
+          <div class="i-material-symbols:play-arrow-rounded w-10 h-10 c-black" />
+        </Show>
+      </button>
       <button
         onClick={async () => {
           await state.player?.nextTrack();
         }}
         type="button"
-      >
-        next
-      </button>
+        class="i-material-symbols:skip-next-rounded w-10 h-10 c-white/80 hover:c-white active:c-white/50"
+      />
     </div>
   );
 };

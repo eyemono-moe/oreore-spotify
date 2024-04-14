@@ -1,16 +1,12 @@
 import type { Component } from "solid-js";
-import { usePlaybackSDK } from "../../context/playbackSdk";
 import Controller from "./Controller";
 import CurrentTrackInfo from "./CurrentTracknfo";
 
 const Player: Component = () => {
-  const [playbackState] = usePlaybackSDK();
-
   return (
-    <div>
+    <div class="flex flex-col gap-4 justify-between h-full">
       <CurrentTrackInfo />
       <Controller />
-      <pre>{JSON.stringify(playbackState, null, 2)}</pre>
     </div>
   );
 };

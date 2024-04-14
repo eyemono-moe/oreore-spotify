@@ -13,15 +13,19 @@
   },
   "dependencies": {
     "@solid-primitives/storage": "^3.3.0",
+    "@unocss/reset": "^0.59.2",
     "pkce-challenge": "^4.1.0",
     "solid-js": "^1.8.15",
     "valibot": "^0.30.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.4",
+    "@iconify-json/material-symbols": "^1.1.78",
     "@types/spotify-web-playback-sdk": "^0.1.19",
+    "@unocss/transformer-variant-group": "^0.59.2",
     "openapi-typescript-codegen": "^0.29.0",
     "typescript": "^5.2.2",
+    "unocss": "^0.59.2",
     "vite": "^5.2.0",
     "vite-plugin-solid": "^2.10.2"
   }

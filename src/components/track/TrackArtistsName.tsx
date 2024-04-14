@@ -5,17 +5,20 @@ const TrackArtistsName: Component<{
   track: Spotify.Track;
 }> = (props) => {
   return (
-    <For each={props.track.artists} fallback={<span>Unknown Artist</span>}>
-      {(artist) => (
-        <a
-          href={getOpenSpotifyUri(artist.uri)}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          {artist.name}
-        </a>
-      )}
-    </For>
+    <div>
+      <For each={props.track.artists} fallback={<span>Unknown Artist</span>}>
+        {(artist) => (
+          <a
+            href={getOpenSpotifyUri(artist.uri)}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="after:not-[:last-child]:content-[',_'] decoration-none"
+          >
+            {artist.name}
+          </a>
+        )}
+      </For>
+    </div>
   );
 };
 

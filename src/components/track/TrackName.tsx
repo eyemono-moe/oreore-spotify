@@ -9,6 +9,7 @@ const TrackName: Component<{
       href={getOpenSpotifyUri(props.track.uri)}
       target="_blank"
       rel="noreferrer noopener"
+      class="decoration-none font-700 text-2rem"
     >
       {props.track.name}
     </a>
